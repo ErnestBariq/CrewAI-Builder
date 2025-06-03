@@ -7,6 +7,7 @@ interface Option {
 
 interface SelectProps {
   id: string;
+  name: string;
   label?: string;
   options: Option[];
   value: string;
@@ -20,6 +21,7 @@ interface SelectProps {
 
 const Select: React.FC<SelectProps> = ({
   id,
+  name,
   label,
   options,
   value,
@@ -42,6 +44,7 @@ const Select: React.FC<SelectProps> = ({
       )}
       <select
         id={id}
+        name={name}
         value={value}
         onChange={onChange}
         disabled={disabled}
