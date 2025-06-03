@@ -80,9 +80,9 @@ const TeamForm: React.FC<TeamFormProps> = ({ team, onClose, isEdit = false }) =>
   };
   
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-800">
+    <div className="bg-white rounded-lg shadow-lg p-4 w-full max-w-sm">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold text-gray-800">
           {isEdit ? 'Edit Team' : 'Create New Team'}
         </h2>
         <button
@@ -93,7 +93,7 @@ const TeamForm: React.FC<TeamFormProps> = ({ team, onClose, isEdit = false }) =>
         </button>
       </div>
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-3">
         <Input
           id="name"
           name="name"
@@ -103,7 +103,6 @@ const TeamForm: React.FC<TeamFormProps> = ({ team, onClose, isEdit = false }) =>
           onChange={handleChange}
           error={errors.name}
           required
-          className="mb-4"
         />
         
         <TextArea
@@ -115,20 +114,21 @@ const TeamForm: React.FC<TeamFormProps> = ({ team, onClose, isEdit = false }) =>
           onChange={handleChange}
           error={errors.description}
           required
-          rows={4}
-          className="mb-6"
+          rows={3}
         />
         
-        <div className="flex justify-end space-x-3">
+        <div className="flex justify-end space-x-3 pt-3">
           <Button
             variant="outline"
             onClick={onClose}
+            size="sm"
           >
             Cancel
           </Button>
           <Button
             type="submit"
-            icon={<PlusCircle size={18} />}
+            icon={<PlusCircle size={16} />}
+            size="sm"
           >
             {isEdit ? 'Update Team' : 'Create Team'}
           </Button>
