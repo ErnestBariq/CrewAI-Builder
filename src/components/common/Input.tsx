@@ -2,6 +2,7 @@ import React from 'react';
 
 interface InputProps {
   id: string;
+  name: string;
   label?: string;
   type?: string;
   placeholder?: string;
@@ -15,6 +16,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({
   id,
+  name,
   label,
   type = 'text',
   placeholder,
@@ -37,6 +39,7 @@ const Input: React.FC<InputProps> = ({
       )}
       <input
         id={id}
+        name={name}
         type={type}
         placeholder={placeholder}
         value={value}
