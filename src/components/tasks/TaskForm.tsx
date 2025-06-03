@@ -104,9 +104,9 @@ const TaskForm: React.FC<TaskFormProps> = ({ teamId, task, agents, tasks, onClos
   const availableDependencyTasks = tasks.filter(t => !isEdit || t.id !== task?.id);
   
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-800">
+    <div className="bg-white rounded-lg shadow-lg p-4 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold text-gray-800">
           {isEdit ? 'Edit Task' : 'Create New Task'}
         </h2>
         <button
@@ -117,7 +117,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ teamId, task, agents, tasks, onClos
         </button>
       </div>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3">
         <TextArea
           id="description"
           name="description"
@@ -127,6 +127,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ teamId, task, agents, tasks, onClos
           onChange={handleChange}
           error={errors.description}
           required
+          rows={2}
         />
         
         <Select
@@ -150,17 +151,17 @@ const TaskForm: React.FC<TaskFormProps> = ({ teamId, task, agents, tasks, onClos
           onChange={handleChange}
           error={errors.expectedOutput}
           required
-          rows={3}
+          rows={2}
         />
         
         {availableDependencyTasks.length > 0 && (
-          <div className="space-y-2">
+          <div className="space-y-1">
             <label className="block text-sm font-medium text-gray-700">Task Dependencies (Optional)</label>
-            <div className="max-h-48 overflow-y-auto border rounded-md p-2">
+            <div className="max-h-32 overflow-y-auto border rounded-md p-2">
               {availableDependencyTasks.map(t => (
                 <div 
                   key={t.id}
-                  className={`p-2 mb-1 rounded cursor-pointer transition-colors ${
+                  className={`p-1.5 mb-1 rounded cursor-pointer transition-colors text-sm ${
                     formData.dependencies.includes(t.id) 
                       ? 'bg-blue-50 border border-blue-200' 
                       : 'hover:bg-gray-50 border border-transparent'
@@ -172,9 +173,9 @@ const TaskForm: React.FC<TaskFormProps> = ({ teamId, task, agents, tasks, onClos
                       type="checkbox" 
                       checked={formData.dependencies.includes(t.id)}
                       onChange={() => {}}
-                      className="mr-2"
+                      className="mr-2 h-3.5 w-3.5"
                     />
-                    <span className="text-sm">{t.description}</span>
+                    <span className="truncate">{t.description}</span>
                   </div>
                 </div>
               ))}
@@ -182,16 +183,18 @@ const TaskForm: React.FC<TaskFormProps> = ({ teamId, task, agents, tasks, onClos
           </div>
         )}
         
-        <div className="flex justify-end space-x-3 pt-4">
+        <div className="flex justify-end space-x-3 pt-3">
           <Button
             variant="outline"
             onClick={onClose}
+            size="sm"
           >
             Cancel
           </Button>
           <Button
             type="submit"
-            icon={<ListPlus size={18} />}
+            icon={<ListPlus size={16} />}
+            size="sm"
           >
             {isEdit ? 'Update Task' : 'Create Task'}
           </Button>
