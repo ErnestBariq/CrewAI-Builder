@@ -2,6 +2,7 @@ import React from 'react';
 
 interface TextAreaProps {
   id: string;
+  name: string;
   label?: string;
   placeholder?: string;
   value: string;
@@ -15,6 +16,7 @@ interface TextAreaProps {
 
 const TextArea: React.FC<TextAreaProps> = ({
   id,
+  name,
   label,
   placeholder,
   value,
@@ -37,6 +39,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       )}
       <textarea
         id={id}
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
