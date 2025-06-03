@@ -115,9 +115,9 @@ const AgentForm: React.FC<AgentFormProps> = ({ teamId, agent, onClose, isEdit = 
   };
   
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-800">
+    <div className="bg-white rounded-lg shadow-lg p-4 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold text-gray-800">
           {isEdit ? 'Edit Agent' : 'Create New Agent'}
         </h2>
         <button
@@ -128,7 +128,7 @@ const AgentForm: React.FC<AgentFormProps> = ({ teamId, agent, onClose, isEdit = 
         </button>
       </div>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3">
         <Input
           id="name"
           name="name"
@@ -160,6 +160,7 @@ const AgentForm: React.FC<AgentFormProps> = ({ teamId, agent, onClose, isEdit = 
           onChange={handleChange}
           error={errors.goal}
           required
+          rows={2}
         />
         
         <TextArea
@@ -171,16 +172,16 @@ const AgentForm: React.FC<AgentFormProps> = ({ teamId, agent, onClose, isEdit = 
           onChange={handleChange}
           error={errors.backstory}
           required
-          rows={3}
+          rows={2}
         />
         
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">Tools</label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Tools</label>
+          <div className="grid grid-cols-2 gap-2">
             {sampleTools.map(tool => (
               <div 
                 key={tool.id}
-                className={`border rounded-md p-3 cursor-pointer transition-colors ${
+                className={`border rounded-md p-2 cursor-pointer transition-colors text-sm ${
                   formData.tools.some(t => t.id === tool.id) 
                     ? 'border-blue-500 bg-blue-50' 
                     : 'border-gray-200 hover:border-gray-300'
@@ -189,11 +190,11 @@ const AgentForm: React.FC<AgentFormProps> = ({ teamId, agent, onClose, isEdit = 
               >
                 <div className="flex items-center">
                   {formData.tools.some(t => t.id === tool.id) ? 
-                    <Minus size={16} className="text-blue-500 mr-2" /> : 
-                    <Plus size={16} className="text-gray-400 mr-2" />
+                    <Minus size={14} className="text-blue-500 mr-1.5" /> : 
+                    <Plus size={14} className="text-gray-400 mr-1.5" />
                   }
                   <div>
-                    <p className="text-sm font-medium">{tool.name}</p>
+                    <p className="font-medium">{tool.name}</p>
                     <p className="text-xs text-gray-500">{tool.description}</p>
                   </div>
                 </div>
@@ -202,7 +203,7 @@ const AgentForm: React.FC<AgentFormProps> = ({ teamId, agent, onClose, isEdit = 
           </div>
         </div>
         
-        <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0">
+        <div className="flex space-x-4">
           <Checkbox
             id="allowDelegation"
             name="allowDelegation"
@@ -220,16 +221,18 @@ const AgentForm: React.FC<AgentFormProps> = ({ teamId, agent, onClose, isEdit = 
           />
         </div>
         
-        <div className="flex justify-end space-x-3 pt-4">
+        <div className="flex justify-end space-x-3 pt-3">
           <Button
             variant="outline"
             onClick={onClose}
+            size="sm"
           >
             Cancel
           </Button>
           <Button
             type="submit"
-            icon={<UserPlus size={18} />}
+            icon={<UserPlus size={16} />}
+            size="sm"
           >
             {isEdit ? 'Update Agent' : 'Create Agent'}
           </Button>
